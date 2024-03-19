@@ -11,7 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import pika
+import os
 
 class mqProducerInterface:
     def __init__(self, routing_key: str, exchange_name: str) -> None:
@@ -23,6 +24,8 @@ class mqProducerInterface:
 
     def setupRMQConnection(self) -> None:
         # Set-up Connection to RabbitMQ service
+        con_params = pika.URLParameters(os.environ["AMQP_URL"])
+        connection = pika.BlockingConnection(parameters=con_params)
 
         # Establish Channel
 
