@@ -23,13 +23,20 @@ def main(sector: str, queueName: str) -> None:
     #
     #                       WRITE CODE HERE!!!
     #
-    
+    bindingKey = "*."+sector+".*"
     consumer = mqConsumer(binding_key=bindingKey,exchange_name="Tech Lab Topic Exchange",queue_name=queueName)    
     consumer.startConsuming()
     
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--sector') 
+    parser.add_argument('-q', '--queue') 
+    args = parser.parse_args()
+    sector = args.sector
+    queue = args.queue
 
     # Implement Logic to read the sector and queueName string from the command line and save them - Step 1
     #
